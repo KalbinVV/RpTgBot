@@ -1,4 +1,4 @@
-package org.qurao.rptgbot.commands;
+package org.qurao.rptgbot.commands.items;
 
 import org.qurao.rptgbot.Bot;
 import org.qurao.rptgbot.ICommand;
@@ -37,7 +37,7 @@ public class AddItemCommand implements ICommand{
 						String itemName = itemsValues[0];
 						StringBuilder descBuilder = new StringBuilder();
 						for(int i = 1; i < itemsValues.length; i++) {
-							descBuilder.append(itemsValues[i]).append(":");
+							descBuilder.append(itemsValues[i]).append(" ");
 						}
 						RpTgBot.getMainStorage().addItem(itemName, descBuilder.toString().trim(),
 								new Stats(strengthValue, intValue, luckValue,

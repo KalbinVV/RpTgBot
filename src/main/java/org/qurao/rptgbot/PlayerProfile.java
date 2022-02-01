@@ -11,6 +11,7 @@ public class PlayerProfile {
 	private Stats stats;
 	private int locationID;
 	private ArrayList<Item> items;
+	private ArrayList<Feature> features;
 	
 	PlayerProfile(String firstName, String secondName, String description,
 			int age, Stats stats, int locationID){
@@ -21,6 +22,7 @@ public class PlayerProfile {
 		this.stats = stats;
 		this.locationID = locationID;
 		items = new ArrayList<Item>();
+		features = new ArrayList<Feature>();
 	}
 	
 	public String getFirstName() {
@@ -79,14 +81,6 @@ public class PlayerProfile {
 		return items;
 	}
 	
-	public void addItem(Item item) {
-		items.add(item);
-	}
-	
-	public void removeItem(int index) {
-		items.remove(index);
-	}
-	
 	public Item removeAndGetItem(int index) {
 		Item item = items.get(index);
 		items.remove(index);
@@ -119,10 +113,13 @@ public class PlayerProfile {
 		for(Item item : items) {
 			capacity += item.getCapacity();
 		}
+		for(Feature feature : features) {
+			capacity += feature.getCapacity();
+		}
 		return capacity;
 	}
 	
-	public Stats getBonusFromItems() {
+	public Stats getBonusFromItemsAndFeatures() {
 		Stats stats = new Stats(0, 0, 0, 0, 0);
 		for(Item item : items) {
 			stats.setStrength(item.getStats().getStrength() + stats.getStrength());
@@ -131,7 +128,18 @@ public class PlayerProfile {
 			stats.setCharisma(item.getStats().getCharisma() + stats.getCharisma());
 			stats.setAgility(item.getStats().getAgility() + stats.getAgility());
 		}
+		for(Feature feature : features) {
+			stats.setStrength(feature.getStats().getStrength() + stats.getStrength());
+			stats.setIntelligence(feature.getStats().getIntelligence() + stats.getIntelligence());
+			stats.setLuck(feature.getStats().getIntelligence() + stats.getLuck());
+			stats.setCharisma(feature.getStats().getCharisma() + stats.getCharisma());
+			stats.setAgility(feature.getStats().getAgility() + stats.getAgility());
+		}
 		return stats;
+	}
+
+	public ArrayList<Feature> getFeatures() {
+		return features;
 	}
 	
 }

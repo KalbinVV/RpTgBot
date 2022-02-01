@@ -1,4 +1,4 @@
-package org.qurao.rptgbot.commands;
+package org.qurao.rptgbot.commands.items;
 
 import org.qurao.rptgbot.Bot;
 import org.qurao.rptgbot.ICommand;

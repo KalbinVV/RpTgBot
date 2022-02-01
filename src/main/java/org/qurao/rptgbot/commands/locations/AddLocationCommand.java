@@ -1,4 +1,4 @@
-package org.qurao.rptgbot.commands;
+package org.qurao.rptgbot.commands.locations;
 
 import org.qurao.rptgbot.Bot;
 import org.qurao.rptgbot.ICommand;
@@ -26,7 +26,7 @@ public class AddLocationCommand implements ICommand{
 				}else {
 					StringBuilder descBuilder = new StringBuilder();
 					for(int i = 1; i < locationValues.length; i++) {
-						descBuilder.append(locationValues[i]).append(":");
+						descBuilder.append(locationValues[i]).append(" ");
 					}
 					RpTgBot.getMainStorage().addLocation(locationValues[0], descBuilder.toString());
 					bot.sendMsg(chatID, "Локация успешно создана!");

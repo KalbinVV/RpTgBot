@@ -1,6 +1,7 @@
 package org.qurao.rptgbot;
 
 import java.io.File;
+
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,6 +10,9 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 
 import org.qurao.rptgbot.commands.*;
+import org.qurao.rptgbot.commands.features.*;
+import org.qurao.rptgbot.commands.items.*;
+import org.qurao.rptgbot.commands.locations.*;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
@@ -55,6 +59,7 @@ public class RpTgBot {
 	
 	private static void registerCommands() {
 		commandsStorage.registerCommand("start", new StartCommand());
+		commandsStorage.registerCommand("help", new HelpCommand());
         commandsStorage.registerCommand("card", new CardCommand());
         commandsStorage.registerCommand("save", new SaveCommand());
         commandsStorage.registerCommand("locations", new LocationsCommand());
@@ -74,6 +79,19 @@ public class RpTgBot {
         commandsStorage.registerCommand("setlocation", new SetPlayerLocationCommand());
         commandsStorage.registerCommand("msgloc", new SendMessageToLocationCommand());
         commandsStorage.registerCommand("msgp", new SendMessageToPlayerCommand());
+        commandsStorage.registerCommand("rmitemplayer", new RemoveItemFromInventoryCommand());
+        commandsStorage.registerCommand("ahelp", new AdminHelpCommand());
+        commandsStorage.registerCommand("pinv", new PlayerInventoryCommand());
+        commandsStorage.registerCommand("rmitemlocation", new RemoveItemFromLocationCommand());
+        commandsStorage.registerCommand("addfeature", new AddFeatureCommand());
+        commandsStorage.registerCommand("features", new FeaturesCommand());
+        commandsStorage.registerCommand("rmplayerfeature", new RemoveFeatureFromPlayerCommand());
+        commandsStorage.registerCommand("addplayerfeature", new AddFeatureToPlayerCommand());
+        commandsStorage.registerCommand("pcard", new PlayerCardCommand());
+        commandsStorage.registerCommand("clearfeatures", new ClearFeaturesCommand());
+        commandsStorage.registerCommand("dice", new PlayerDiceCommand());
+        commandsStorage.registerCommand("dicew", new PlayerDiceWithoutBonusCommand());
+        commandsStorage.registerCommand("act", new ActionCommand());
 	}
 
 	public static Bot getBot() {

@@ -1,4 +1,4 @@
-package org.qurao.rptgbot.commands;
+package org.qurao.rptgbot.commands.items;
 
 import org.qurao.rptgbot.Bot;
 import org.qurao.rptgbot.ICommand;
@@ -20,28 +20,29 @@ public class AddItemToLocationCommand implements ICommand{
 			if(args.length < 3) {
 				bot.sendMsg(chatID, "Необходимо указать ID локации и ID предмета!"
 						+ "\n /additemtolocation IDLocation ID");
-			}
-			try {
-				int idLocation = Integer.parseInt(args[1]);
-				Location location = mainStorage.getLocationById(idLocation);
-				if(location != null) {
-					try {
-						int id = Integer.parseInt(args[2]);
-						if(mainStorage.isItemExists(id)) {
-							Item item = RpTgBot.getMainStorage().createItemById(id);
-							location.getItems().add(item);
-							bot.sendMsg(chatID, "Предмет успешно добавлен!");
-						}else {
-							bot.sendMsg(chatID, "Данного предмета не существует!");
+			}else {
+				try {
+					int idLocation = Integer.parseInt(args[1]);
+					Location location = mainStorage.getLocationById(idLocation);
+					if(location != null) {
+						try {
+							int id = Integer.parseInt(args[2]);
+							if(mainStorage.isItemExists(id)) {
+								Item item = RpTgBot.getMainStorage().createItemById(id);
+								location.getItems().add(item);
+								bot.sendMsg(chatID, "Предмет успешно добавлен!");
+							}else {
+								bot.sendMsg(chatID, "Данного предмета не существует!");
+							}
+						} catch (NumberFormatException ex) {
+							bot.sendMsg(chatID, "Необходимо вводить числа!");
 						}
-					} catch (NumberFormatException ex) {
-						bot.sendMsg(chatID, "Необходимо вводить числа!");
+					}else {
+						bot.sendMsg(chatID, "Данной локации не существует!");
 					}
-				}else {
-					bot.sendMsg(chatID, "Данной локации не существует!");
+				}catch (NumberFormatException ex) {
+					bot.sendMsg(chatID, "Необходимо вводить числа!");
 				}
-			}catch (NumberFormatException ex) {
-				bot.sendMsg(chatID, "Необходимо вводить числа!");
 			}
 		}else {
 			bot.sendMsg(chatID, "Только мастер может добавлять предметы в локации!");

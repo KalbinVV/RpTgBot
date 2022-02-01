@@ -13,7 +13,9 @@ public class StartCommand implements ICommand{
 		String chatID = message.getChatId().toString();
 		RpTgBot.getUsersStorage().addPlayerIDIfNotExist(message.getFrom().getUserName(),
 				chatID);
-		bot.sendMsg(chatID, "Ваш ID успешно сохранён! Ожидайте действий мастера.");
+		bot.sendMsg(chatID, "Добро пожаловать в игру!\n" +
+				"Чтобы увидеть доступные вам команды - воспользуйтесь командой /help."
+				+ "\nОжидайте дальнейших действий мастера.");
 	}
 
 }

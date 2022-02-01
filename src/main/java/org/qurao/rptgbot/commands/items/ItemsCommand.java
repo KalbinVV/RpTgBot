@@ -1,34 +1,30 @@
-package org.qurao.rptgbot.commands;
+package org.qurao.rptgbot.commands.items;
 
 import org.qurao.rptgbot.Bot;
 import org.qurao.rptgbot.ICommand;
 import org.qurao.rptgbot.MainStorage;
 import org.qurao.rptgbot.RpTgBot;
-import org.qurao.rptgbot.UsersStorage;
+import org.qurao.rptgbot.Stats;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public class LocationsCommand implements ICommand{
+public class ItemsCommand implements ICommand{
 
 	@Override
 	public void run(Message message) {
 		if(RpTgBot.getUsersStorage().isAdmin(message.getFrom().getUserName())) {
 			String chatID = message.getChatId().toString();
 			Bot bot = RpTgBot.getBot();
-			UsersStorage usersStorage = RpTgBot.getUsersStorage();
 			MainStorage mainStorage = RpTgBot.getMainStorage();
-			bot.sendMsg(chatID, "Общее число локаций: " + mainStorage.getLocationsAmount());
-			for(var entry : mainStorage.getLocationsEntry()) {
-				int locationID = entry.getKey();
-				StringBuilder builder = new StringBuilder();
-				for(String player : usersStorage
-						.getPlayersInLocation(locationID)) {
-					builder.append(player).append(" (" 
-						+ usersStorage.getPlayerProfile(player).getFullName() + ")\n");
-				}
-				bot.sendMsg(chatID, "ID: " + locationID + "\n" +
+			bot.sendMsg(chatID, 
+					"Общее количество предметов: " + mainStorage.getItemsAmount());
+			for(var entry : mainStorage.getItemsEntry()) {
+				int itemID = entry.getKey();
+				Stats stats = entry.getValue().getStats();
+				bot.sendMsg(chatID, "ID: " + itemID + "\n" +
 						"Название: " + entry.getValue().getName() +
 						"\nОписание: " + entry.getValue().getDescription() +
-						"\nИгроки на локации: " + builder.toString().trim());
+						"\nХарактеристики:\n" + stats.getString()
+						+ "\nВместительность: " + entry.getValue().getCapacity());
 			}
 		}else {
 			RpTgBot.getBot().sendMsg(message.getChatId().toString(), 

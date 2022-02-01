@@ -29,9 +29,11 @@ public class Bot extends TelegramLongPollingBot {
 				for(String playerInLocation : usersStorage.getPlayersInLocation(
 						profile.getLocationID()
 						)) {
-					sendMsg(usersStorage.getPlayerChatID(playerInLocation),
+					if(!playerInLocation.equals(userName)) {
+						sendMsg(usersStorage.getPlayerChatID(playerInLocation),
 							userName + " (" + profile.getFullName() + "): "
 							+ message.getText());
+					}
 				}
 				for(String admin : usersStorage.getAdmins()) {
 					sendMsg(usersStorage.getPlayerChatID(admin), "(" +
@@ -49,7 +51,7 @@ public class Bot extends TelegramLongPollingBot {
 
 	@Override
 	public String getBotToken() {
-		return "5296959574:AAEaMj2agpdkLZsujiwWJvcqEtFsYFjfsqM";
+		return "Token";
 	}
 	
 	public synchronized void sendMsg(String chatId, String s) {

@@ -56,4 +56,12 @@ public class Stats {
 		this.agility = agility;
 	}
 	
+	public String getString() {
+		return "Cила: " + strength +
+		"\nИнтеллект: " + intelligence +
+		"\nУдача: " + luck +
+		"\nХаризма: " + charisma + 
+		"\nЛовкость: " + agility;
+	}
+	
 }
