@@ -57,8 +57,10 @@ public class PlayerDiceWithoutBonusCommand implements ICommand{
 							int max = Integer.parseInt(args[3]);
 							int diff = max - min;
 							int result = new Random().nextInt(diff + 1) + min;
+							int calculatedResult = result + bonus;
 							String resultMessage ="(Кубик без учета предметов/"+typeName+")(От "
-									+ min + " до " + max + "): " + result + "+" + bonus; 
+									+ min + " до " + max + ")\n" + result + " + " + bonus
+									+ " = " + calculatedResult; 
 							bot.sendMsg(chatID, resultMessage);
 							bot.sendMsg(usersStorage.getPlayerChatID(player),
 									resultMessage);
