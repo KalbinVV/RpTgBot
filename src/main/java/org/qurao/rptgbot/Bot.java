@@ -93,7 +93,7 @@ public class Bot extends TelegramLongPollingBot {
 
 	@Override
 	public String getBotToken() {
-		return "TOKEN";
+		return "5296959574:AAEaMj2agpdkLZsujiwWJvcqEtFsYFjfsqM";
 	}
 	
 	public synchronized void sendMsg(String chatId, String s) {

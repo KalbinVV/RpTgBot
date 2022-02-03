@@ -37,7 +37,8 @@ public class AdminHelpCommand implements ICommand{
 					+ "/pcard Игрок - посмотреть карточку игрока.\n"
 					+ "/dice Игрок min max тип(str, int, luck, chr, agi) - бросить кубик игроку.\n"
 					+ "/dicew Игрок min max тип(str, int, luck, chr, agi) - бросить кубик игроку. (Без учета бонуса)\n"
-					+ "/setcontentid IDlocation - Установить ID локации куда будет отправляться контент.");
+					+ "/setcontentid IDlocation - Установить ID локации куда будет отправляться контент.\n"
+					+ "/linv IDlocation - Посмотреть инвентарь локации");
 		}else {
 			bot.sendMsg(chatID, "Это команда доступна только мастеру!");
 		}

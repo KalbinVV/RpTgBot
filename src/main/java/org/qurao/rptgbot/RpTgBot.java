@@ -107,6 +107,7 @@ public class RpTgBot {
         commandsStorage.registerCommand("dicew", new PlayerDiceWithoutBonusCommand());
         commandsStorage.registerCommand("act", new ActionCommand());
         commandsStorage.registerCommand("setcontentid", new SendLocationIdToContentCommand());
+        commandsStorage.registerCommand("linv", new LocationInventoryCommand());
 	}
 
 	public static Bot getBot() {
