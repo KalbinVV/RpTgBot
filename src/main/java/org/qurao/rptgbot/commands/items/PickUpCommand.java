@@ -9,6 +9,7 @@ import org.qurao.rptgbot.Location;
 import org.qurao.rptgbot.MainStorage;
 import org.qurao.rptgbot.PlayerProfile;
 import org.qurao.rptgbot.RpTgBot;
+import org.qurao.rptgbot.UsersStorage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 public class PickUpCommand implements ICommand{
@@ -30,12 +31,20 @@ public class PickUpCommand implements ICommand{
 				Location location = mainStorage.getLocationById(profile.getLocationID());
 				Item item = location.getItems().get(id);
 				ArrayList<Item> playerItems = profile.getItems();
-				if(playerItems.size() >= profile.getCapacity()) {
+				if(playerItems.size() >= profile.getCapacity() - item.getCapacity()) {
 					bot.sendMsg(chatID, "Вы достигли предела предметов!");
 				}else {
 					profile.getItems().add(item);
 					mainStorage.getLocationById(profile.getLocationID()).getItems().remove(item);
 					bot.sendMsg(chatID, "Вы подобрали предмет: " + item.getName());
+					UsersStorage usersStorage = RpTgBot.getUsersStorage();
+					for(String admin : usersStorage.getAdmins()) {
+						bot.sendMsg(usersStorage.getPlayerChatID(admin),
+							"(" + profile.getFullName() + "/" + userName+")"
+								+ "(Локация: " + location.getName()
+								+ "/ID: " + profile.getLocationID() + ")\n"
+								+ "Подобрал предмет: " + item.getName());
+					}
 				}
 			} catch(IndexOutOfBoundsException ex) {
 				bot.sendMsg(chatID, "Неверно указан ID предмета!");

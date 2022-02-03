@@ -32,11 +32,12 @@ public class AdminHelpCommand implements ICommand{
 					+ " Имя:Описание - создать новую черту.\n"
 					+ "/features - посмотреть список всех черт.\n"
 					+ "/addplayerfeature Игрок ID - добавить игроку черту.\n"
-					+ "/rmplayerfeature Игрок ID - удалить черту игроку\n."
+					+ "/rmplayerfeature Игрок ID - удалить черту игроку.\n"
 					+ "/clearfeatures - очистить черты.\n"
 					+ "/pcard Игрок - посмотреть карточку игрока.\n"
 					+ "/dice Игрок min max тип(str, int, luck, chr, agi) - бросить кубик игроку.\n"
-					+ "/dicew Игрок min max тип(str, int, luck, chr, agi) - бросить кубик игроку. (Без учета бонуса)");
+					+ "/dicew Игрок min max тип(str, int, luck, chr, agi) - бросить кубик игроку. (Без учета бонуса)\n"
+					+ "/setcontentid IDlocation - Установить ID локации куда будет отправляться контент.");
 		}else {
 			bot.sendMsg(chatID, "Это команда доступна только мастеру!");
 		}

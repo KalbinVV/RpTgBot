@@ -8,11 +8,13 @@ public class UsersStorage {
 	private HashMap<String, PlayerProfile> profiles;
 	private HashSet<String> admins;
 	private HashMap<String, String> chatIDs;
+	private int locationIDToSendContent;
 	
 	public UsersStorage(){
 		profiles = new HashMap<String, PlayerProfile>();
 		admins = new HashSet<String>();
 		chatIDs = new HashMap<String, String>();
+		setLocationIDToSendContent(0);
 	}
 	
 	public void addPlayerIDIfNotExist(String userName, String chatID) {
@@ -55,6 +57,14 @@ public class UsersStorage {
 	
 	public boolean isAdmin(String userName) {
 		return admins.contains(userName);
+	}
+
+	public int getLocationIDToSendContent() {
+		return locationIDToSendContent;
+	}
+
+	public void setLocationIDToSendContent(int locationIDToSendContent) {
+		this.locationIDToSendContent = locationIDToSendContent;
 	}
 	
 }

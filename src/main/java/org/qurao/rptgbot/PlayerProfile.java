@@ -92,19 +92,19 @@ public class PlayerProfile {
 		if(stats.getStrength() < 5) {
 			switch(stats.getStrength()) {
 				case 0:
-					capacity = 2;
+					capacity = 4;
 					break;
 				case 1:
-					capacity = 5;
+					capacity = 7;
 					break;
 				case 2:
-					capacity = 9;
+					capacity = 11;
 					break;
 				case 3:
-					capacity = 12;
+					capacity = 14;
 					break;
 				case 4:
-					capacity = 14;
+					capacity = 16;
 					break;
 			}
 		}else {

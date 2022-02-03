@@ -25,9 +25,10 @@ public class ActionCommand implements ICommand{
 			}
 			PlayerProfile profile = usersStorage.getPlayerProfile(userName);
 			for(String admin : usersStorage.getAdmins()) {
-				bot.sendMsg(usersStorage.getPlayerChatID(admin), "(Действие! Видно только мастеру.) (" +
-				RpTgBot.getMainStorage().getLocationById(profile.getLocationID()).getName()
-				+ "/ID:" + profile.getLocationID() + ") " + userName + ": " + builder.toString());
+				bot.sendMsg(usersStorage.getPlayerChatID(admin), 
+					"(Действие! Видно только мастеру) (" +
+					RpTgBot.getMainStorage().getLocationById(profile.getLocationID()).getName()
+				+ "/ID:" + profile.getLocationID() + ")\n" + userName + ": " + builder.toString());
 			}
 		}
 	}

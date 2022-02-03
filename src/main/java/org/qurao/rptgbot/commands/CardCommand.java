@@ -9,6 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 
 public class CardCommand implements ICommand{
+	
 	@Override
 	public void run(Message message) {
 		PlayerProfile profile = RpTgBot.getUsersStorage().getPlayerProfile(

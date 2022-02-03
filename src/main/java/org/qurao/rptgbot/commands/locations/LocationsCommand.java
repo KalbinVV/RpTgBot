@@ -28,7 +28,7 @@ public class LocationsCommand implements ICommand{
 				bot.sendMsg(chatID, "ID: " + locationID + "\n" +
 						"Название: " + entry.getValue().getName() +
 						"\nОписание: " + entry.getValue().getDescription() +
-						"\nИгроки на локации: " + builder.toString().trim());
+						"\nИгроки на локации:\n" + builder.toString().trim());
 			}
 		}else {
 			RpTgBot.getBot().sendMsg(message.getChatId().toString(), 

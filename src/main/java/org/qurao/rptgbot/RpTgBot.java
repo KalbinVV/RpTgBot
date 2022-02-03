@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.qurao.rptgbot.commands.*;
 import org.qurao.rptgbot.commands.features.*;
@@ -28,6 +30,8 @@ public class RpTgBot {
 	private static CommandsStorage commandsStorage;
 	private static UsersStorage usersStorage;
 	private static MainStorage mainStorage;
+	private static TimerTask saveToFileTask;
+	private static Timer timer;
 	
 	public static void main(String[] args) {
 		try {
@@ -52,7 +56,17 @@ public class RpTgBot {
             registerCommands();
             botsApi.registerBot(getBot());
             System.out.println("Bot enabled!");
-        } catch (TelegramApiException e) {
+            saveToFileTask = new TimerTask() {
+            	@Override
+            	public void run() {
+            		saveUsersToFile();
+            		saveMainStorageToFile();
+            		System.out.println("Data saved!");
+            	}
+            };
+            timer = new Timer();
+            getTimer().schedule(getSaveToFileTask(), 60000); //Каждую минуту.
+		} catch (TelegramApiException e) {
             e.printStackTrace();
         }
 	}
@@ -92,6 +106,7 @@ public class RpTgBot {
         commandsStorage.registerCommand("dice", new PlayerDiceCommand());
         commandsStorage.registerCommand("dicew", new PlayerDiceWithoutBonusCommand());
         commandsStorage.registerCommand("act", new ActionCommand());
+        commandsStorage.registerCommand("setcontentid", new SendLocationIdToContentCommand());
 	}
 
 	public static Bot getBot() {
@@ -188,5 +203,13 @@ public class RpTgBot {
             }
         }
     }
+
+	public static TimerTask getSaveToFileTask() {
+		return saveToFileTask;
+	}
+
+	public static Timer getTimer() {
+		return timer;
+	}
 	
 }
